@@ -54,9 +54,9 @@ def disadvantage(dice)
     score1 = rand(dice[0])
     score2 = rand(dice[0])
     if score1 >= score2
-        return score1
-    else
         return score2
+    else
+        return score1
     end
 end
 
