@@ -1,3 +1,6 @@
+require "tty-prompt"
+prompt = TTY::Prompt.new
+
 #DICE VALUES
 D4 = [1..4]
 D6 = [1..6]
@@ -63,11 +66,11 @@ def straight(dice)
 end
 
 def monster_attack(player_input)
-    if player_input == "d"
+    if player_input == "RECKLESS"
         hit_score = advantage(D20)
-    elsif player_input == "r"
+    elsif player_input == "DEFENSIVE"
         hit_score = disadvantage(D20) 
-    elsif player_input == "b"
+    elsif player_input == "BALANCED"
         hit_score = straight(D20)
     end
     return hit_score
@@ -81,26 +84,18 @@ while current_mon_health > 0
     while roll_choice == true
         puts "PLAYER HP: #{current_player_health}/#{player_health}"
         puts "MONSTER HP: #{current_mon_health}/#{mon_health}"
-
-        puts "Type a letter to attack"
-        puts "[d]efensive, [b]alanced or [r]eckless"
-        print "ATTACK STYLE: "
         
-        input = gets.chomp.to_s
+        input = prompt.select("How do you want to attack the creature?", %w(BALANCED DEFENSIVE RECKLESS))
 
-        if input == "d"
+        if input == "RECKLESS"
             hit_score = advantage(D20)
             break
-        elsif input == "r"
+        elsif input == "DEFENSIVE"
             hit_score = disadvantage(D20) 
             break
-        elsif input == "b"
+        elsif input == "BALANCED"
             hit_score = straight(D20)
             break
-        else
-            system('clear')
-            puts "INVALID INPUT"
-            puts "type d, b or r"
         end
     end
 
@@ -176,23 +171,18 @@ if current_mon_health <= 0
 else
     puts "DEATH!"
     puts "The monster was too much for you."
-    puts "You fall backward and feel your conciousness fall into the abyss..."
+    puts "You fall backward and feel your conciousness slip into the abyss..."
 end
 
 puts "Play Again?"
 print "[y/n]"
 
-while roll_choice == true
-    continue = gets.chomp.to_s
-        if continue == "n"
-            puts "Thanks for playing!!"
-            exit
-        elsif continue == "y"
-            load('attack.rb')
-        else
-            system('clear')
-            puts "INVALID INPUT"
-            puts "enter y or n"
-            print "[y/n]"
-        end
+
+continue = prompt.select("Play Again?", %w(YES NO))
+
+if continue == "NO"
+    puts "Thanks for playing!!"
+    exit
+elsif continue == "YES"
+    load('attack.rb')
 end
