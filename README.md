@@ -11,6 +11,9 @@ Brawling game where the user fights a number of enemies
 - As a user, I want to be able to play the game easily with cursor prompts
 - As a user, I want to be able to read an explanation of the game
 - As a user I want to be able to input my name and be prompted by my name.
+- random monster encounters
+- some with higher encounter rates
+- special moves by each monster that is on a cool-down
 ---
 
 ## Features List -  Nice to Haves

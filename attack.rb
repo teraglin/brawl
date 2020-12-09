@@ -69,7 +69,7 @@ def monster_attack(player_input)
     if player_input == "RECKLESS"
         hit_score = advantage(D20)
     elsif player_input == "DEFENSIVE"
-        hit_score = disadvantage(D20) 
+        hit_score = disadvantage(D20)
     elsif player_input == "BALANCED"
         hit_score = straight(D20)
     end
@@ -89,12 +89,18 @@ while current_mon_health > 0
 
         if input == "RECKLESS"
             hit_score = advantage(D20)
+            puts "You attack your enemy all out in an agressive rage!"
+            puts "You roll two die to hit and use the highest roll..."
             break
         elsif input == "DEFENSIVE"
             hit_score = disadvantage(D20) 
+            puts "You maintain your guard and attack cautiously."
+            puts "You roll two die to hit and use the lowest roll..."
             break
         elsif input == "BALANCED"
             hit_score = straight(D20)
+            puts "You keep your balance and stick to the fundamentals of stabbing things with sharp weapons"
+            puts "You roll one dice to hit..."
             break
         end
     end
@@ -129,6 +135,8 @@ while current_mon_health > 0
         gets
         system('clear')
     end
+
+    # dialogue for moster attack
 
     monster_hit = monster_attack(input)
     
@@ -175,7 +183,6 @@ else
 end
 
 puts "Play Again?"
-print "[y/n]"
 
 
 continue = prompt.select("Play Again?", %w(YES NO))
